@@ -201,6 +201,7 @@ public class QkartSanity {
 
         // Search for product and get card content element of search results
         status = homePage.searchForProduct("Running Shoes");
+        Thread.sleep(5000);
         List<WebElement> searchResults = homePage.getSearchResults();
 
         // Create expected values
@@ -224,6 +225,7 @@ public class QkartSanity {
 
                 // Open the size chart
                 if (result.openSizechart()) {
+                    Thread.sleep(3000);
                     // Verify if the size chart contents matches the expected values
                     if (result.validateSizeChartContents(expectedTableHeaders, expectedTableBody, driver)) {
                         logStatus("Step Success", "Successfully validated contents of Size Chart Link", "PASS");
@@ -518,7 +520,7 @@ public class QkartSanity {
 
             System.out.println("");
 
-            // Execute Test Case 4
+            // // Execute Test Case 4
             totalTests += 1;
             status = TestCase04(driver);
             if (status) {

@@ -39,6 +39,8 @@ public class SearchResult {
 
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
             // Find the link of size chart in the parentElement and click on it
+            WebElement sizeCharWebelement=parentElement.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div[2]/div[1]/div/div[1]/button"));
+            sizeCharWebelement.click();
             return true;
         } catch (Exception e) {
             System.out.println("Exception while opening Size chart: " + e.getMessage());
@@ -77,9 +79,15 @@ public class SearchResult {
              * the element is "SIZE CHART". If the text "SIZE CHART" matches for the
              * element, set status = true , else set to false
              */
-            WebElement element = parentElement.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div[2]/div[1]/div/div[1]/button"));
-           
-            status = element.getText().equals("SIZE CHART");
+            WebElement element = parentElement.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[1]/div[2]/div[1]/div/div[1]/button"));
+           if(element.isDisplayed()){
+            if(element.getText().equals("SIZE CHART")){
+                status=true;
+            }else{
+                status = false;
+
+            }
+           }
            
             return status;
         } catch (Exception e) {
@@ -105,6 +113,33 @@ public class SearchResult {
              * Validate that the contents of expectedTableBody are present in the table body
              * in the same order
              */
+           List<WebElement> tableHeaders=driver.findElements(By.xpath("//table/thead//th"));
+           for(int i=0;i< expectedTableHeaders.size();i++){
+            WebElement headerElement=tableHeaders.get(i);
+            String headerValue=expectedTableHeaders.get(i);
+            if(!headerElement.getText().equals(headerValue)){
+                status=false;
+            }
+         }
+
+           for(int i=0; i<expectedTableBody.size();i++){
+
+            int tableRow=i+1;
+            List<String> childArrayrow=expectedTableBody.get(i); 
+            for(int j=0;j<childArrayrow.size();j++){
+                int tableColumn=j+1;
+                WebElement tableValue=driver.findElement(By.xpath("//table/tbody/tr["+tableRow+"]/td["+tableColumn+"]"));
+
+                String actualValue=tableValue.getText();
+                String expectValue=expectedTableBody.get(i).get(j);
+                if(!actualValue.equals(expectValue)){
+                    status=false;
+                }
+
+
+            }
+           }
+
 
             return status;
 
@@ -122,7 +157,7 @@ public class SearchResult {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
             // If the size dropdown exists and is displayed return true, else return false
-            WebElement dropdown=driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div[2]/div[1]/div/div[2]/div/div/select"));
+            WebElement dropdown=parentElement.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div[2]/div[1]/div/div[2]/div/div/select"));
             status=dropdown.isDisplayed();
             
             return status;
