@@ -132,8 +132,8 @@ public class Home {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find and click on the the Checkout button
-            WebElement checkOut = driver.findElement(
-                    By.xpath("//button[normalize-space()='Checkout']"));
+            WebElement checkOut =
+                    driver.findElement(By.xpath("//button[normalize-space()='Checkout']"));
             checkOut.click();
             return status;
         } catch (Exception e) {
@@ -150,42 +150,44 @@ public class Home {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 06: MILESTONE 5
 
             // Find the item on the cart with the matching productName
-            List<WebElement> cartItemElements=driver.findElements(By.xpath("//div[@class='cart MuiBox-root css-0']//div[@class='MuiBox-root css-0']"));
-            for(WebElement cartItemElement:cartItemElements){
-                String actualProductNmae=cartItemElement
-                .findElement(By.xpath(".//div[@class='MuiBox-root css-1gjj37g']/div[1]"))
-                .getText();
-                if(actualProductNmae.equals(productName)){
-                  String quantityString=cartItemElement
-                  .findElement(By.xpath(".//div[@data-testid='item-qty']")).getText();
-                  int actualQuantity=Integer.parseInt(quantityString);
-                  while(true){
-                    if(actualQuantity<quantity){
-                        WebElement plusIcon=driver.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[2]"));
-                        plusIcon.click();
-                    }else if(actualQuantity>quantity){
-                    WebElement minusIcon=driver.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[1]"));
-                    minusIcon.click();
+            List<WebElement> cartItemElements = driver.findElements(By.xpath(
+                    "//div[@class='cart MuiBox-root css-0']//div[@class='MuiBox-root css-0']"));
+            for (WebElement cartItemElement : cartItemElements) {
+                String actualProductNmae = cartItemElement
+                        .findElement(By.xpath(".//div[@class='MuiBox-root css-1gjj37g']/div[1]"))
+                        .getText();
+                if (actualProductNmae.equals(productName)) {
+                    String quantityString = cartItemElement
+                            .findElement(By.xpath(".//div[@data-testid='item-qty']")).getText();
+                    int actualQuantity = Integer.parseInt(quantityString);
+                    while (true) {
+                        if (actualQuantity < quantity) {
+                            WebElement plusIcon = driver.findElement(By.xpath(
+                                    "//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[2]"));
+                            plusIcon.click();
+                        } else if (actualQuantity > quantity) {
+                            WebElement minusIcon = driver.findElement(By.xpath(
+                                    "//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[1]"));
+                            minusIcon.click();
+
+                        }
+                        Thread.sleep(2000);
+                        if (quantity == 0) {
+                            break;
+                        }
+                        quantityString = cartItemElement
+                                .findElement(By.xpath("//div[@data-testid='item-qty']")).getText();
+                        actualQuantity = Integer.parseInt(quantityString);
+                        if (actualQuantity == quantity) {
+                            break;
+                        }
 
                     }
-                    Thread.sleep(2000);
-                    if(quantity==0){
-                        break;
-                    }
-                    quantityString=cartItemElement
-                               .findElement(By.xpath("//div[@data-testid='item-qty']"))
-                    .getText();
-                    actualQuantity=Integer.parseInt(quantityString);
-                    if(actualQuantity==quantity){
-                        break;
-                    }
-
-                  }
                 }
 
             }
             // Increment or decrement the quantity of the matching product until the current
-           
+
             // quantity is reached (Note: Keep a look out when then input quantity is 0,
             // here we need to remove the item completely from the cart)
 
@@ -205,16 +207,31 @@ public class Home {
     public Boolean verifyCartContents(List<String> expectedCartContents) {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 07: MILESTONE 6
+            boolean status = false;
 
             // Get all the cart items as an array of webelements
-
+            List<WebElement> cartItemElements = driver
+                    .findElements(By.xpath(".//div[@class='MuiBox-root css-1gjj37g']/div[1]"));
+                  
 
             // Iterate through expectedCartContents and check if item with matching product
+            for (int i = 0; i < expectedCartContents.size(); i++) {
+
+                if (cartItemElements.get(i).getText().equals(expectedCartContents.get(i))) {
+                    status = true;
+                    System.out.println(cartItemElements.get(i).getText()+" + "+expectedCartContents.get(i));
+                } else {
+                    status = false;
+                    break;
+                }
+
+
+            }
+            return status;
 
             // name is present in the cart
 
 
-            return true;
 
         } catch (Exception e) {
             System.out.println("Exception while verifying cart contents: " + e.getMessage());

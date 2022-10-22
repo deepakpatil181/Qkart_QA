@@ -415,6 +415,7 @@ public class QkartSanity {
 
         status = homePage.searchForProduct("Xtend");
         homePage.addProductToCart("Xtend Smart Watch");
+        Thread.sleep(5000);
 
         homePage.PerformLogout();
 
@@ -542,7 +543,7 @@ public class QkartSanity {
 
             System.out.println("");
 
-            // // Execute Test Case 6
+            // // // Execute Test Case 6
             totalTests += 1;
             status = TestCase06(driver);
             if (status) {
@@ -551,14 +552,14 @@ public class QkartSanity {
 
             System.out.println("");
 
-            // // Execute Test Case 7
-            // totalTests += 1;
-            // status = TestCase07(driver);
-            // if (status) {
-            // passedTests += 1;
-            // }
+            // // // Execute Test Case 7
+            totalTests += 1;
+            status = TestCase07(driver);
+            if (status) {
+            passedTests += 1;
+            }
 
-            // System.out.println("");
+            System.out.println("");
 
             // Execute Test Case 8
             totalTests += 1;
