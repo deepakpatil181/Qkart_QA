@@ -327,26 +327,19 @@ public class QkartSanity {
         // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 06: MILESTONE 5
 
         // TODO: Register a new user
-       
-
-        status = registration.registerUser("testUser", "abc@123", true);
-        if (!status) {
-            logStatus("TestCase 5", "Test Case Failure. Happy Flow Test Failed", "FAIL");
-        }
-
-        lastGeneratedUserName = registration.lastGeneratedUsername;
-       
-
+        registration.navigateToRegisterPage();
+      status = registration.registerUser("testUser", "abc@123", true);
+         
         // TODO: Login using the newly registed user
+        lastGeneratedUserName = registration.lastGeneratedUsername;
+
+        // Go to the login page
        
-       
-        
-         // Login with the newly registered user's credentials
-         status = login.PerformLogin(lastGeneratedUserName, "abc@123");
-         if (!status) {
-             logStatus("Step Failure", "User Perform Login Failed", status ? "PASS" : "FAIL");
-             logStatus("End TestCase", "Test Case 5: Happy Flow Test Failed : ", status ? "PASS" : "FAIL");
-         }
+        login.navigateToLoginPage();
+
+        // Login with the newly registered user's credentials
+        status = login.PerformLogin(lastGeneratedUserName, "abc@123");
+         
 
 
         // TODO: Add "Xtend Smart Watch" to cart
@@ -539,13 +532,13 @@ public class QkartSanity {
             System.out.println("");
 
             // // Execute Test Case 6
-            // totalTests += 1;
-            // status = TestCase06(driver);
-            // if (status) {
-            // passedTests += 1;
-            // }
+            totalTests += 1;
+            status = TestCase06(driver);
+            if (status) {
+            passedTests += 1;
+            }
 
-            // System.out.println("");
+            System.out.println("");
 
             // Execute Test Case 7
             // totalTests += 1;

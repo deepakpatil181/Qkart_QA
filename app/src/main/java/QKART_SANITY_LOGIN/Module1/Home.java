@@ -40,15 +40,15 @@ public class Home {
     }
 
     /*
-     * Returns Boolean if searching for the given product name occurs without any
-     * errors
+     * Returns Boolean if searching for the given product name occurs without any errors
      */
     public Boolean searchForProduct(String product) {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 03: MILESTONE 1
             // Clear the contents of the search box and Enter the product name in the search
             // box
-            WebElement searchBox=driver.findElement(By.xpath("/html/body/div/div/div/div[1]/div[2]/div/input"));
+            WebElement searchBox =
+                    driver.findElement(By.xpath("/html/body/div/div/div/div[1]/div[2]/div/input"));
             searchBox.clear();
             searchBox.sendKeys(product);
             Thread.sleep(5000);
@@ -64,13 +64,13 @@ public class Home {
      * Returns Array of Web Elements that are search results and return the same
      */
     public List<WebElement> getSearchResults() {
-        List<WebElement> searchResults = new ArrayList<WebElement>() {
-        };
+        List<WebElement> searchResults = new ArrayList<WebElement>() {};
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 03: MILESTONE 1
             // Find all webelements corresponding to the card content section of each of
             // search results
-            searchResults=driver.findElements(By.xpath("/html/body/div/div/div/div[3]/div/div[2]/div/div/div[1]/p[1]"));
+            searchResults = driver.findElements(
+                    By.xpath("/html/body/div/div/div/div[3]/div/div[2]/div/div/div[1]/p[1]"));
 
 
             return searchResults;
@@ -90,8 +90,9 @@ public class Home {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 03: MILESTONE 1
             // Check the presence of "No products found" text in the web page. Assign status
             // = true if the element is *displayed* else set status = false
-            WebElement noProductSearch=driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div[2]/div/h4"));
-            status=noProductSearch.isDisplayed();
+            WebElement noProductSearch =
+                    driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div[2]/div/h4"));
+            status = noProductSearch.isDisplayed();
             return status;
         } catch (Exception e) {
             return status;
@@ -105,16 +106,17 @@ public class Home {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
-             * Iterate through each product on the page to find the WebElement corresponding
-             * to the matching productName
+             * Iterate through each product on the page to find the WebElement corresponding to the
+             * matching productName
              * 
              * Click on the "ADD TO CART" button for that element
              * 
              * Return true if these operations succeeds
              */
-            WebElement addProduct=driver.findElement(By.xpath("//*[@id='root']/div[1]/div/div[3]/div[1]/div[2]/div/div/div[2]/button"));
+            WebElement addProduct = driver.findElement(By.xpath(
+                    "//*[@id='root']/div[1]/div/div[3]/div[1]/div[2]/div/div/div[2]/button"));
             addProduct.click();
-                //System.out.println("Unable to find the given product");
+            // System.out.println("Unable to find the given product");
             return false;
         } catch (Exception e) {
             System.out.println("Exception while performing add to cart: " + e.getMessage());
@@ -130,8 +132,9 @@ public class Home {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find and click on the the Checkout button
-           WebElement checkOut=driver.findElement(By.xpath("/html/body/div/div/div/div[3]/div[2]/div/div[4]/button"));
-           checkOut.click(); 
+            WebElement checkOut = driver.findElement(
+                    By.xpath("/html/body/div/div/div/div[3]/div[2]/div/div[4]/button"));
+            checkOut.click();
             return status;
         } catch (Exception e) {
             System.out.println("Exception while clicking on Checkout: " + e.getMessage());
@@ -140,23 +143,49 @@ public class Home {
     }
 
     /*
-     * Return Boolean denoting the status of change quantity of product in cart
-     * operation
+     * Return Boolean denoting the status of change quantity of product in cart operation
      */
     public Boolean changeProductQuantityinCart(String productName, int quantity) {
         try {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 06: MILESTONE 5
 
             // Find the item on the cart with the matching productName
-            WebElement watch=driver.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[2]"));
-            
-            // Increment or decrement the quantity of the matching product until the current
-            watch.click();
-            WebElement decreasewatch=driver.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[1]"));
-            decreasewatch.click();
+            List<WebElement> cartItemElements=driver.findElements(By.xpath("//div[@class='cart MuiBox-root css-0']//div[@class='MuiBox-root css-0']"));
+            for(WebElement cartItemElement:cartItemElements){
+                String actualProductNmae=cartItemElement
+                .findElement(By.xpath(".//div[@class='MuiBox-root css-1gjj37g']/div[1]"))
+                .getText();
+                if(actualProductNmae.equals(productName)){
+                  String quantityString=cartItemElement
+                  .findElement(By.xpath(".//div[@data-testid='item-qty']")).getText();
+                  int actualQuantity=Integer.parseInt(quantityString);
+                  while(true){
+                    if(actualQuantity<quantity){
+                        WebElement plusIcon=driver.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[2]"));
+                        plusIcon.click();
+                    }else if(actualQuantity>quantity){
+                    WebElement minusIcon=driver.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[1]/div/div[2]/div[2]/div[1]/button[1]"));
+                    minusIcon.click();
 
-            WebElement yarin=driver.findElement(By.xpath("//*[@id='root']/div/div/div[3]/div[2]/div/div[2]/div/div[2]/div[2]/div[1]/button[1]"));
-            yarin.click();
+                    }
+                    Thread.sleep(2000);
+                    if(quantity==0){
+                        break;
+                    }
+                    quantityString=cartItemElement
+                               .findElement(By.xpath("//div[@data-testid='item-qty']"))
+                    .getText();
+                    actualQuantity=Integer.parseInt(quantityString);
+                    if(actualQuantity==quantity){
+                        break;
+                    }
+
+                  }
+                }
+
+            }
+            // Increment or decrement the quantity of the matching product until the current
+           
             // quantity is reached (Note: Keep a look out when then input quantity is 0,
             // here we need to remove the item completely from the cart)
 
