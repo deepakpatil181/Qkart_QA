@@ -133,7 +133,7 @@ public class Home {
             // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             // Find and click on the the Checkout button
             WebElement checkOut = driver.findElement(
-                    By.xpath("/html/body/div/div/div/div[3]/div[2]/div/div[4]/button"));
+                    By.xpath("//button[normalize-space()='Checkout']"));
             checkOut.click();
             return status;
         } catch (Exception e) {
@@ -208,7 +208,9 @@ public class Home {
 
             // Get all the cart items as an array of webelements
 
+
             // Iterate through expectedCartContents and check if item with matching product
+
             // name is present in the cart
 
 

@@ -396,8 +396,18 @@ public class QkartSanity {
 
         // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 07: MILESTONE 6
         // TODO: Register a new user
+        registration.navigateToRegisterPage();
+      status = registration.registerUser("testUser", "abc@123", true);
+         
+        // TODO: Login using the newly registed user
+        lastGeneratedUserName = registration.lastGeneratedUsername;
 
-        // TODO: Login using the newly created user
+        // Go to the login page
+       
+        login.navigateToLoginPage();
+
+        // Login with the newly registered user's credentials
+        status = login.PerformLogin(lastGeneratedUserName, "abc@123");
 
         homePage.navigateToHome();
         status = homePage.searchForProduct("Stylecon");
@@ -457,6 +467,7 @@ public class QkartSanity {
         Thread.sleep(3000);
 
         homePage.changeProductQuantityinCart("Stylecon 9 Seater RHS Sofa Set", 10);
+        Thread.sleep(3000);
 
         homePage.clickCheckout();
 
@@ -540,7 +551,7 @@ public class QkartSanity {
 
             System.out.println("");
 
-            // Execute Test Case 7
+            // // Execute Test Case 7
             // totalTests += 1;
             // status = TestCase07(driver);
             // if (status) {
@@ -550,13 +561,13 @@ public class QkartSanity {
             // System.out.println("");
 
             // Execute Test Case 8
-            // totalTests += 1;
-            // status = TestCase08(driver);
-            // if (status) {
-            // passedTests += 1;
-            // }
+            totalTests += 1;
+            status = TestCase08(driver);
+            if (status) {
+            passedTests += 1;
+            }
 
-            // System.out.println("");
+            System.out.println("");
 
         } catch (Exception e) {
             throw e;
