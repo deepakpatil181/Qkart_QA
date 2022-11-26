@@ -130,6 +130,7 @@ public class QkartSanity {
         // Visit the Registration page and register a new user
         Register registration = new Register(driver);
         registration.navigateToRegisterPage();
+        takeScreenshot(driver, "StartTestCase", "TestCase02");
         status = registration.registerUser("testUser", "abc@123", true);
         logStatus("Test Step", "User Registration : ", status ? "PASS" : "FAIL");
         if (!status) {
@@ -172,7 +173,7 @@ public class QkartSanity {
             logStatus("TestCase 3", "Test Case Failure. Unable to search for given product", "FAIL");
             return false;
         }
-
+        takeScreenshot(driver, "StartTestCase", "TestCase03");
         // Fetch the search results
         List<WebElement> searchResults = homePage.getSearchResults();
 
@@ -236,6 +237,7 @@ public class QkartSanity {
 
         // SLEEP_STMT_03 : Wait for page to load
         WebDriverWait wait = new WebDriverWait(driver, 30);
+    
 
 		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//*[@id='root']/div/div/div[3]/div[1]/div[2]/div[4]/div/div[1]/p[1]")));
         // Search for product and get card content element of search results
@@ -243,7 +245,7 @@ public class QkartSanity {
         List<WebElement> searchResults = homePage.getSearchResults();
 
 
-       
+        takeScreenshot(driver, "StartTestCase", "TestCase04");
         // Create expected values
         List<String> expectedTableHeaders = Arrays.asList("Size", "UK/INDIA", "EU", "HEEL TO TOE");
         List<List<String>> expectedTableBody = Arrays.asList(Arrays.asList("6", "6", "40", "9.8"),
@@ -306,7 +308,7 @@ public class QkartSanity {
 
         // Register a new user
         status = registration.registerUser("testUser", "abc@123", true);
-        
+        takeScreenshot(driver, "StartTestCase", "TestCase05");
 
         // Save the username of the newly registered user
         lastGeneratedUserName = registration.lastGeneratedUsername;
@@ -385,6 +387,7 @@ public class QkartSanity {
 
         // Login with the newly registered user's credentials
         status = login.PerformLogin(lastGeneratedUserName, "abc@123");
+        takeScreenshot(driver, "StartTestCase", "TestCase05");
          
 
 
@@ -431,8 +434,10 @@ public class QkartSanity {
      */
     public static Boolean TestCase07(RemoteWebDriver driver) throws InterruptedException {
         Boolean status = false;
+        takeScreenshot(driver, "StartTestCase", "TestCase05");
         List<String> expectedResult = Arrays.asList("Stylecon 9 Seater RHS Sofa Set",
                 "Xtend Smart Watch");
+
 
         logStatus("Start TestCase", "Test Case 7: Verify that cart contents are persisted after logout", "DONE");
 
@@ -483,6 +488,7 @@ public class QkartSanity {
         logStatus("Start TestCase",
                 "Test Case 8: Verify that insufficient balance error is thrown when the wallet balance is not enough",
                 "DONE");
+                takeScreenshot(driver, "StartTestCase", "TestCase05");
 
         Register registration = new Register(driver);
         registration.navigateToRegisterPage();
@@ -510,11 +516,9 @@ public class QkartSanity {
         Home homePage = new Home(driver);
         homePage.navigateToHome();
         status = homePage.searchForProduct("Stylecon");
-        homePage.addProductToCart("Stylecon 9 Seater RHS Sofa Set");
-        Thread.sleep(3000);
+        homePage.addProductToCart("Stylecon 9 Seater RHS Sofa Set ");
 
-        homePage.changeProductQuantityinCart("Stylecon 9 Seater RHS Sofa Set", 10);
-        Thread.sleep(3000);
+        homePage.changeProductQuantityinCart("Stylecon 9 Seater RHS Sofa Set ", 10);
 
         homePage.clickCheckout();
 
@@ -523,7 +527,7 @@ public class QkartSanity {
         checkoutPage.selectAddress("Addr line 1 addr Line 2 addr line 3");
 
         checkoutPage.placeOrder();
-        Thread.sleep(5000);
+        Thread.sleep(3000);
 
         status = checkoutPage.verifyInsufficientBalanceMessage();
 
@@ -536,6 +540,7 @@ public class QkartSanity {
 
     public static Boolean TestCase09(RemoteWebDriver driver) throws InterruptedException {
         Boolean status = false;
+        
 
         logStatus("Start TestCase",
                 "Test Case 9: Verify that product added to cart is available when a new tab is opened",
@@ -862,13 +867,13 @@ public class QkartSanity {
             System.out.println("");
 
           // // Execute Test Case 8
-            // totalTests += 1;
-            // status = TestCase08(driver);
-            // if (status) {
-            // passedTests += 1;
-            // }
+            totalTests += 1;
+            status = TestCase08(driver);
+            if (status) {
+            passedTests += 1;
+            }
 
-            // System.out.println("");
+            System.out.println("");
 
             // Execute Test Case 9
             totalTests += 1;
