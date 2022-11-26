@@ -771,7 +771,7 @@ public class QkartSanityV2 {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         try {
-            // Execute Test Case 1
+            //Execute Test Case 1
             totalTests += 1;
             status = TestCase01(driver);
             if (status) {
