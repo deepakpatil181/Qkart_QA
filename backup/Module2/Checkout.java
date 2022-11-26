@@ -38,9 +38,6 @@ public class Checkout {
            text.sendKeys(addresString);
            WebElement saveaddress=driver.findElement(By.xpath("//*[@id='root']/div/div[2]/div[1]/div/div[2]/div[2]/button[1]"));
            saveaddress.click();
-           WebDriverWait wait = new WebDriverWait(driver, 30);
-
-		wait.until(ExpectedConditions.visibilityOfElementLocated(By.xpath("//div[@class='MuiGrid-root MuiGrid-item MuiGrid-grid-xs-12 MuiGrid-grid-md-9 css-14gqd74']//div[@class='MuiBox-root css-0']//div[1]//div[1]")));
 
 
                 return false;
@@ -55,6 +52,7 @@ public class Checkout {
      */
     public Boolean selectAddress(String addressToSelect) {
         try {
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
              * Iterate through all the address boxes to find the address box with matching
              * text, addressToSelect and click on it
@@ -79,7 +77,6 @@ public class Checkout {
             // Find the "PLACE ORDER" button and click on it
             WebElement placeAnOrder=driver.findElement(By.xpath("/html/body/div/div/div[2]/div[1]/div/button[2]"));
             placeAnOrder.click();
-            Thread.sleep(3000);
             return false;
 
         } catch (Exception e) {

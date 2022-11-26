@@ -1,7 +1,8 @@
 package QKART_SANITY_LOGIN.Module1;
 
+import java.sql.Driver;
 import java.util.List;
-import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.Keys;
 import org.openqa.selenium.WebDriver;
@@ -40,7 +41,6 @@ public class SearchResult {
             // Find the link of size chart in the parentElement and click on it
             WebElement sizeCharWebelement=parentElement.findElement(By.xpath("/html/body/div/div/div/div[3]/div/div[2]/div[1]/div/div[1]/button"));
             sizeCharWebelement.click();
-            Thread.sleep(5000);
             return true;
         } catch (Exception e) {
             System.out.println("Exception while opening Size chart: " + e.getMessage());
@@ -103,6 +103,7 @@ public class SearchResult {
             WebDriver driver) {
         Boolean status = true;
         try {
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 04: MILESTONE 2
             /*
              * Locate the table element when the size chart modal is open
              * 
@@ -112,7 +113,6 @@ public class SearchResult {
              * Validate that the contents of expectedTableBody are present in the table body
              * in the same order
              */
-           
            List<WebElement> tableHeaders=driver.findElements(By.xpath("//table/thead//th"));
            for(int i=0;i< expectedTableHeaders.size();i++){
             WebElement headerElement=tableHeaders.get(i);
@@ -121,7 +121,6 @@ public class SearchResult {
                 status=false;
             }
          }
-         
 
            for(int i=0; i<expectedTableBody.size();i++){
 

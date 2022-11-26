@@ -1,7 +1,7 @@
 package QKART_SANITY_LOGIN.Module1;
 
 import java.time.Duration;
-import java.util.concurrent.TimeUnit;
+
 import org.openqa.selenium.By;
 import org.openqa.selenium.NoSuchElementException;
 import org.openqa.selenium.WebDriver;
@@ -46,9 +46,8 @@ public class Login {
         // Click the login Button
         login_button.click();
 
-        // SLEEP_STMT_13: Wait for Login to Complete
         // Wait for Login action to complete
-        driver.manage().timeouts().implicitlyWait(10, TimeUnit.SECONDS);
+        Thread.sleep(5000);
 
         return this.VerifyUserLoggedIn(Username);
     }

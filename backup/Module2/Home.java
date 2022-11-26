@@ -29,7 +29,6 @@ public class Home {
             WebElement logout_button = driver.findElement(By.className("MuiButton-text"));
             logout_button.click();
 
-            // SLEEP_STMT_10: Wait for Logout to complete
             // Wait for Logout to Complete
             Thread.sleep(3000);
 
@@ -49,9 +48,8 @@ public class Home {
             // Clear the contents of the search box and Enter the product name in the search
             // box
             WebElement searchBox =
-                    driver.findElement(By.xpath("//*[@id='root']/div/div/div[1]/div[2]/div/input"));
+                    driver.findElement(By.xpath("/html/body/div/div/div/div[1]/div[2]/div/input"));
             searchBox.clear();
-            Thread.sleep(3000);
             searchBox.sendKeys(product);
             Thread.sleep(5000);
 
@@ -106,9 +104,10 @@ public class Home {
      */
     public Boolean addProductToCart(String productName) {
         try {
+            // TODO: CRIO_TASK_MODULE_TEST_AUTOMATION - TEST CASE 05: MILESTONE 4
             /*
-             * Iterate through each product on the page to find the WebElement corresponding
-             * to the matching productName
+             * Iterate through each product on the page to find the WebElement corresponding to the
+             * matching productName
              * 
              * Click on the "ADD TO CART" button for that element
              * 
@@ -117,9 +116,7 @@ public class Home {
             WebElement addProduct = driver.findElement(By.xpath(
                     "//*[@id='root']/div[1]/div/div[3]/div[1]/div[2]/div/div/div[2]/button"));
             addProduct.click();
-            Thread.sleep(3000);
             // System.out.println("Unable to find the given product");
-            System.out.println("Unable to find the given product");
             return false;
         } catch (Exception e) {
             System.out.println("Exception while performing add to cart: " + e.getMessage());
