@@ -488,7 +488,6 @@ public class QkartSanity {
         logStatus("Start TestCase",
                 "Test Case 8: Verify that insufficient balance error is thrown when the wallet balance is not enough",
                 "DONE");
-                takeScreenshot(driver, "StartTestCase", "TestCase05");
 
         Register registration = new Register(driver);
         registration.navigateToRegisterPage();
@@ -516,9 +515,11 @@ public class QkartSanity {
         Home homePage = new Home(driver);
         homePage.navigateToHome();
         status = homePage.searchForProduct("Stylecon");
-        homePage.addProductToCart("Stylecon 9 Seater RHS Sofa Set ");
+        homePage.addProductToCart("Stylecon 9 Seater RHS Sofa Set");
+        Thread.sleep(3000);
 
-        homePage.changeProductQuantityinCart("Stylecon 9 Seater RHS Sofa Set ", 10);
+        homePage.changeProductQuantityinCart("Stylecon 9 Seater RHS Sofa Set", 10);
+        Thread.sleep(3000);
 
         homePage.clickCheckout();
 
@@ -527,7 +528,7 @@ public class QkartSanity {
         checkoutPage.selectAddress("Addr line 1 addr Line 2 addr line 3");
 
         checkoutPage.placeOrder();
-        Thread.sleep(3000);
+        Thread.sleep(1000);
 
         status = checkoutPage.verifyInsufficientBalanceMessage();
 
@@ -540,7 +541,7 @@ public class QkartSanity {
 
     public static Boolean TestCase09(RemoteWebDriver driver) throws InterruptedException {
         Boolean status = false;
-        
+
 
         logStatus("Start TestCase",
                 "Test Case 9: Verify that product added to cart is available when a new tab is opened",
@@ -804,7 +805,7 @@ public class QkartSanity {
         driver.manage().timeouts().implicitlyWait(30, TimeUnit.SECONDS);
 
         try {
-        //     // // Execute Test Case 1
+        // //     // // Execute Test Case 1
             totalTests += 1;
             status = TestCase01(driver);
             if (status) {
