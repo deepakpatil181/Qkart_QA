@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE suite SYSTEM "https://testng.org/testng-1.0.dtd">
+<suite name ="Suite">
+<parameter name = "Password" value="abc@123"/>
+<parameter name = "UserName" value="testUser"/>
+    <test name="Test Execution using TestNG-Sanity">
+     <groups>
+        <run>
+            <include name ="Sanity_test"></include>
+        </run>
+     </groups>
+        <parameter name = "ProductName" value="YONEX"/>
+        <parameter name = "ProductShoe" value="Running Shoes"/>
+        <parameter name = "AddProductCart1" value="YONEX Smash Badminton Racquet"/>
+        <parameter name = "AddProductCart2" value="Tan Leatherette Weekender Duffle"/>
+        <parameter name = "address" value="Addr line 1 addr line 2 addr line 3"/>
+        <parameter name = "AddProductCart1" value="Xtend Smart Watch"/>
+        <parameter name = "AddProductCart2" value="Yarine Floor Lamp"/>
+        <parameter name = "searchProduct1" value="Stylecon 9 Seater RHS Sofa Set"/>
+        <parameter name = "searchProduct2" value="Xtend Smart Watch"/>
+        <parameter name = "product" value="Stylecon 9 Seater RHS Sofa Set"/>
+        <parameter name = "quantity" value="60"/>
+        <parameter name = "TC11_ContactusUserName" value="crio user"/>
+        <parameter name = "TC11_ContactUsEmail" value="criouser@gmail.com"/>
+        <parameter name = "TC11_QueryContent" value="Testing the content us page"/>
+        <parameter name = "ProductNameToSearch" value="YONEX Smash Badminton Racquet"/>
+        <parameter name = "AddresstoAdd" value="Addr line1 addr line 2 addr line3"/>
+    <classes>
+        <class name = "QKART_TESTNG.QKART_Tests"></class>
+    </classes>
+    </test>
+</suite>
